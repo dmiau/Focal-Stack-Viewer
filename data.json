@@ -1,0 +1,85 @@
+{
+    "smallWorld":{"src_dir" : "stack/smallWorld/",
+		  "frame_number" : 41,
+		  "depth_map" : "idxImage.png",
+		  "title" : "Small Wolrd"
+		 },
+    "avery3": {
+	"src_dir": "stack/avery3/",
+	"frame_number": 30,
+	"depth_map": "avery3_depthmap.png",
+	"title": "Towards Avery"
+    },
+    "averyWatch10": {
+	"src_dir": "stack/averyWatch10/",
+	"frame_number": 26,
+	"depth_map": "averyWatch10_depthmap.png",
+	"title": "averyWatch10"
+    },
+    "averyWatch7": {
+	"src_dir": "stack/averyWatch7/",
+	"frame_number": 34,
+	"depth_map": "averyWatch7_depthmap.png",
+	"title": "Done with the class"
+    },
+    "exp10": {
+	"src_dir": "stack/exp10/",
+	"frame_number": 39,
+	"depth_map": "exp10_depthmap.png",
+	"title": "Campus walk"
+    },
+    "flowerLady": {
+	"src_dir": "stack/flowerLady/",
+	"frame_number": 42,
+	"depth_map": "flowerLady_depthmap.png",
+	"title": "Lady in red"
+    },
+    "flowerMan": {
+	"src_dir": "stack/flowerMan/",
+	"frame_number": 39,
+	"depth_map": "flowerMan_depthmap.png",
+	"title": "Texting on the go"
+    },
+    "joe10": {
+	"src_dir": "stack/joe10/",
+	"frame_number": 26,
+	"depth_map": "joe10_depthmap.png",
+	"title": "Joe Cafe"
+    },
+    "lawn7": {
+	"src_dir": "stack/lawn7/",
+	"frame_number": 25,
+	"depth_map": "lawn7_depthmap.png",
+	"title": "Picnic on the South Lawn"
+    },
+    "lowPlaza2": {
+	"src_dir": "stack/lowPlaza2/",
+	"frame_number": 44,
+	"depth_map": "lowPlaza2_depthmap.png",
+	"title": "Low Plaza stawberries"
+    },
+    "math": {
+	"src_dir": "stack/math/",
+	"frame_number": 48,
+	"depth_map": "math_depthmap.png",
+	"title": "Speed walking"
+    },
+    "stairs11": {
+	"src_dir": "stack/stairs11/",
+	"frame_number": 24,
+	"depth_map": "stairs11_depthmap.png",
+	"title": "Chilling on Low stairs"
+    },
+    "stairs1": {
+	"src_dir": "stack/stairs1/",
+	"frame_number": 28,
+	"depth_map": "stairs1_depthmap.png",
+	"title": "Picnic by Alma Mater"
+    },
+    "x_sunDial": {
+	"src_dir": "stack/x_sunDial/",
+	"frame_number": 18,
+	"depth_map": "x_sunDial_depthmap.png",
+	"title": "Conversation by the sun dial"
+    }
+}

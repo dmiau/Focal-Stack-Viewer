@@ -1,0 +1,199 @@
+/*-------------------
+  General styles
+  --------------------*/
+
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body{
+    background-color:rgb(20, 20, 20);
+    color: #8C8C8C;
+    font-family: "Verdana";
+    margin:0px;
+    padding:0px;
+}
+
+/* Body link style*/
+a {color: #8C8C8C;}
+a:link {text-decoration:none;}
+a:hover {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:active {text-decoration:none;}
+
+/*-------------------
+  Header related styles
+  --------------------*/
+
+div.header {
+    background-color:#FFFFFF;
+    display:block;
+    width: 100%;
+    height:50px;
+    color: #000000; /*text color*/
+}
+
+#ProjTitle {
+    font-size: 30px;
+    margin-left: 30px;
+    margin-top:5px; /*TODO: need to make it middle*/
+    float:left;
+}
+
+#CAVE {
+    font-size: 25px;
+    margin-top:8px; /*TODO: need to make it middle*/
+    margin-left: 30px;
+    margin-right: 30px;
+    float:right;
+}
+
+/* Header link style*/
+.header a {color: #000000;}
+.header a:link {text-decoration:none;}
+.header a:hover {text-decoration:none;}
+.header a:visited {text-decoration:none;}
+.header a:active {text-decoration:none;}
+
+/*-------------------
+  Viewer related styles
+  --------------------*/
+
+/* viewer title */
+#SpaceTime {
+    font-size: 22px;
+    margin-top: 5px;
+    margin-left: 30px;
+    float: left
+}
+
+#Camera {
+    font-size: 22px;
+    margin-top: 5px;    
+    margin-right: 30px;
+    float: right
+}
+
+
+table{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td{
+    vertical-align: top;
+}
+
+/* main viewer */
+#focusViewer{
+    /* this position:absolute is necessary to make sure the crosshair aligns with the cursor */
+    position: absolute;
+/* display: table-cell; */
+}
+
+#focusViewer_loading{
+    position: absolute;
+    z-index: 101;
+    top: 300px; /*TODO: jumping here, why?*/
+    display:none;
+/* width:100%; */
+/* margin-left: auto; */
+/* margin-right: auto; */
+/* left: 350px /\* why this does not center*\/ */
+}
+
+.activeLayer {
+    position: absolute;
+    border: 2px solid #404040;
+
+    /* http://stackoverflow.com/questions/3186688/drop-shadow-for-png-image-in-css */
+    /* http://www.css3.info/preview/box-shadow/ */
+    /* -moz-box-shadow: 0 0 5px 5px #888; */
+    /* -webkit-box-shadow: 0 0 5px 5px#888; */
+    /* box-shadow: 0 0 2px 2px #404040; */
+
+    z-index: 10;
+}
+
+.idxTable{	
+    position: absolute;
+    z-index: -1;
+    display: none;
+}
+
+/*-------------------
+  Title/instructions related styles
+  --------------------*/
+#dataTitle {
+    color: #8C8C8C;
+    font-size: 16px;
+    margin-top:8px; /*TODO: need to make it middle*/
+    margin-left: 0px;
+    float:left;
+}
+#instructions {
+    color: #8C8C8C; /*text color*/
+    font-size: 16px;
+    margin-top:8px; /*TODO: need to make it middle*/
+    margin-right: 0px;
+    float:right;
+}
+
+/*-------------------
+  Gallery related styles
+  --------------------*/
+.gallery td{
+    padding: 4px;
+    text-align: center;
+}
+
+.gallery img {
+    border: 0;
+    cursor: pointer; 
+    max-height: 100px;
+    width: auto;
+}
+
+/* .gallery a:link {text-decoration:none;} */
+/* .gallery a:hover {text-decoration:none;} */
+/* .gallery a:visited {text-decoration:none;} */
+/* .gallery a:active {text-decoration:none;} */
+
+/* .gallery a{ */
+/*     outline: none; */
+/* } */
+
+/*-------------------
+  Footer related styles
+  --------------------*/
+
+/* http://ryanfait.com/resources/footer-stick-to-bottom-of-page/ */
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -2em;
+}
+
+.push{
+    height: 2em;
+}
+
+.footer{
+    background-color:#FFFFFF;
+    height:2em;
+    color: #888; /*text color*/
+    text-align: center;
+    padding: 1em;
+    font-size: 11px; 
+    vertical-align: bottom;
+}
+
+.footer a {color: #888; /*text color*/}
+.footer a:hover {text-decoration:underline;}
+.footer a:visited {text-decoration:none;}
+.footer a:active {text-decoration:underline;}

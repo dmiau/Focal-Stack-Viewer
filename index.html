@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Duration Focal Stack Photography Viewer</title>
+    <link rel=StyleSheet href="focalstack.css" type="text/css" media=screen>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="focalStackViewer.js"></script>
+    
+    <script type="text/javascript">
+      $(document).ready(function() {
+	  
+	  // To display a specific dataset, specify the identifier of the dataset with the "id" parameter	  
+	  // e.g., index.html?id=avery
+	  //
+	  // This app has two modes: single_img mode (default) and single_canvas mode
+	  // To specify a mode, specify the mode name with the "mode" parameter 
+	  // e.g., index.html?mode=single_img
+	  // single_img mode seems to work well on all the browsers 
+	  
+	  //-----------------------
+	  // app parameters
+	  //-----------------------
+
+	  // detailed information of each dataset is stored in this json file
+	  var json_file = 'data.json';
+	  
+	  //-----------------------
+	  // URL argument parsing
+	  //-----------------------	  
+	  var data_id = null;
+	  var params = {};
+	  $.each(location.search.substring(1).split("&"), 
+		 function() {
+		     var temp = this.split("=");
+		     params[temp[0]] = temp[1];
+		 });
+	  
+	  //use a default ID if an ID is not provided by the URL
+	  if (!params.hasOwnProperty('id')){
+	      data_id = "stairs11";
+	  }else{
+	      data_id = params['id'];
+	  }
+	  
+	  if (!params.hasOwnProperty('mode')){
+	      mode = "single_img"; //default mode
+	  }else{
+	      mode = params['mode'];
+	  }	
+	  
+	  //use global var to hold dataset information
+	  g_data_sets = null;
+	  
+	  // read the json file
+	  // NOTE all string in json files have to be "double" quoted,
+	  // not single quoted, otherwise ajax or getJSON will fail SILENTLY
+	  // http://stackoverflow.com/questions/2177548/load-json-into-variable	  
+	  $.ajax({
+	      'async': false,
+	      'global': false,
+	      'url': json_file,
+	      'dataType': 'json',
+	      'success': function(data){
+		  g_data_sets= data;
+	      },
+	      'error': function(){
+		  g_data_sets = null;
+		  alert("Failed to read data.json!");
+	      }
+	  });
+	  
+	  g_viewer = null;	  
+	  // check if there exists a dataset with the specified id
+	  if (g_data_sets != null && g_data_sets.hasOwnProperty(data_id)){
+	      // initialize focalStackViewer, pass the object to focalStack
+	      g_viewer = new focalStackViewer(
+		  $("#focusViewer"), mode, g_data_sets[data_id]);
+	  }else{
+	      alert("Initialization failed!");
+	      return;
+	  }
+
+	  // udpate instructions based on browser
+	  // http://stackoverflow.com/questions/3514784/best-way-to-detect-handheld-device-in-jquery
+	  if( navigator.userAgent.match(/Android/i)
+	      || navigator.userAgent.match(/webOS/i)
+	      || navigator.userAgent.match(/iPhone/i)
+	      || navigator.userAgent.match(/iPad/i)
+	      || navigator.userAgent.match(/iPod/i)
+	      || navigator.userAgent.match(/BlackBerry/i)
+	    ){
+	      $('#instructions').html("tap to focus");
+	  }
+	  	  
+      }); //end of ready
+      
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      
+      <!-- =============== -->
+      <!-- header -->
+      <!-- =============== -->
+      <div class="header">
+	<table width=980px><tr><td>
+	      <div id="ProjTitle">Focal Sweep Photography</div>
+	      <div id="CAVE"><a href="http://www.cs.columbia.edu/CAVE">Columbia CAVE</a></div>
+	</td></tr></table>>
+      </div>
+      
+      <!-- =============== -->
+      <!-- body -->
+      <!-- =============== -->
+      <table width=980px><tr><td>
+	    <div id="SpaceTime">Space-Time Refocusing</div>
+	    <div id="Camera"><a href="http://www.cs.columbia.edu/CAVE">Focal Sweep Camera</a></div>
+      </td></tr></table>
+      <br />
+      
+      <!--
+	  Here is a hack to make sure that the floating div block occupies a physical space,
+	  not overlaps the table. I create a *fixed size* table with nothing but the div block.
+	  The table occupies a space and the div block floats inside the table.
+	-->
+      <table border="0" cellpadding="0"
+	     cellspacing="0" width="860"  class="focusViewer_frame">
+	
+	<!-- =============== -->
+	<!-- viewer -->
+	<!-- =============== -->
+	<tr> 
+	  <td class="focusViewer_frame"  height="680">
+	    
+	    <div id="focusViewer">
+	      <img id="focusViewer_loading" src="loading.gif" />
+	      <!-- an picture, whether an <img> tag or a <canvas> tag,
+		   will be inserted by JavaScript at this "anchor" point-->
+	      <div id="anchor"></div> 
+	      <canvas class="idxTable" id="focusViewer_Canvas"> This text is displayed if your browser does not support HTML5 Canvas.</canvas>
+	    </div>
+	  </td>
+	</tr>
+	<!-- =============== -->
+	<!-- title and instruction come here -->
+	<!-- =============== -->      
+	<tr>
+	  <td> 
+	    
+	    <div id="dataTitle">avery3</div>
+	    <div id="instructions">click to focus</div>
+	    
+	  </td>		  
+	</tr>
+      </table> <!-- hack table -->
+      
+      <br />
+      <br />
+      
+      <!-- =============== -->
+      <!-- thumbnail table -->
+      <!-- =============== -->
+      
+      <table class="gallery">
+	<tr>
+	  <td><img  src="thumbnails/stairs11.jpg"
+		    onclick="g_viewer.switchDataset(g_data_sets['stairs11']);"></td>
+	  <td><img src="thumbnails/averyWatch7.jpg"
+		   onclick="g_viewer.switchDataset(g_data_sets['averyWatch7']);"></td>
+	  <td><img  src="thumbnails/exp10.jpg"
+		    onclick="g_viewer.switchDataset(g_data_sets['exp10']);"></td>
+	  <td><img  src="thumbnails/flowerLady.jpg"
+		    onclick="g_viewer.switchDataset(g_data_sets['flowerLady']);"></td>
+	  <td><img src="thumbnails/avery3.jpg"
+		   onclick="g_viewer.switchDataset(g_data_sets['avery3']);"></td>
+	  <td><img src="thumbnails/joe10.jpg"
+		   onclick="g_viewer.switchDataset(g_data_sets['joe10']);"></td>	
+	</tr>
+	
+	<tr>
+	  <td><img  src="thumbnails/lawn7.jpg"
+		    onclick="g_viewer.switchDataset(g_data_sets['lawn7']);"></td>
+	  <td><img  src="thumbnails/lowPlaza2.jpg"
+		    onclick="g_viewer.switchDataset(g_data_sets['lowPlaza2']);"></td>
+	  <td><img  src="thumbnails/math.jpg"
+		    onclick="g_viewer.switchDataset(g_data_sets['math']);"></td>
+	  <td><img src="thumbnails/stairs1.jpg" 
+		   onclick="g_viewer.switchDataset(g_data_sets['stairs1']);"></td>
+	  <td><img  src="thumbnails/flowerMan.jpg"
+		    onclick="g_viewer.switchDataset(g_data_sets['flowerMan']);"></td>
+	  <td><img  src="thumbnails/x_sunDial.jpg"
+		    onclick="g_viewer.switchDataset(g_data_sets['x_sunDial']);"></td>
+	</tr>
+	
+      </table>
+      
+      <div class="push"></div>
+      
+    </div>
+    <!-- ============== -->
+    <!-- footer  -->
+    <!-- ============== -->
+    <div class="footer"> 
+      <a href="http://www.cs.columbia.edu/CAVE/">Computer Vision Laboratory</a> | 
+      <a href="http://www.cs.columbia.edu">Department of Computer Science</a> | 
+      <a href="http://www.columbia.edu">Columbia University</a> 
+      <br /> Copyright @ 2012 Columbia University. All rights reserved.
+    </div>
+  </body>
+</html>
